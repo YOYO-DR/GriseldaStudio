@@ -5,13 +5,6 @@ if [ -d "/app/staticfiles" ]; then
     rm -rf /app/staticfiles/*
 fi
 
-echo "Esperando a que PostgreSQL esté disponible..."
-while ! nc -z db 5432; do
-    echo "Esperando a que PostgreSQL esté disponible..."
-    sleep 1
-done
-echo "PostgreSQL está disponible."
-
 echo "Ejeutando migraciones..."
 python manage.py makemigrations
 python manage.py migrate
