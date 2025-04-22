@@ -9,6 +9,7 @@ services:
       - ./GriseldaStudioAPI/media:/app/media
       - ./GriseldaStudioAPI/staticfiles:/app/staticfiles
       - ./GriseldaStudioAPI/logs:/app/logs
+      - ./GriseldaStudioAPI:/app/GriseldaStudioAPI
     env_file:
       - ./.env
 
