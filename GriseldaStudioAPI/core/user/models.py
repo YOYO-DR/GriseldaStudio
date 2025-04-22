@@ -90,7 +90,7 @@ class UserProfile(AbstractModel):
   def image_url(self):
     if self.imagen:
       return self.imagen.url
-    return f"{STATIC_URL}media/img/user_empty.png"
+    return f"{STATIC_URL}/img/user_empty.png"
   
   def __str__(self):
     return f"{self.user.username} Profile"
