@@ -16,7 +16,11 @@ from config.db import BDCONFIG
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
 
+# Crear el directorio de logs si no existe
+if not os.path.exists(LOGS_DIR):
+  os.makedirs(LOGS_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -182,3 +186,117 @@ REST_FRAMEWORK = {
 }
 
 APPEND_SLASH = False
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{levelname}] {asctime} [{thread:d}] [{module}] {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '[{levelname}] {message}',
+            'style': '{',
+        },
+        'request': {
+            'format': '[{levelname}] {asctime} {message}',
+            'style': '{',
+        },
+        'error': {
+            'format': '[{levelname}] {asctime} [{thread:d}] [{module}] {message}\n{pathname}:{lineno}\n{exc_info}',
+            'style': '{',
+        }
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'file_general': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOGS_DIR, 'django.log'),
+            'when': 'midnight',
+            # 'backupCount': 30,  # Mantener logs de los últimos 30 días
+            'formatter': 'verbose',
+        },
+        'file_errors': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOGS_DIR, 'errors.log'),
+            'when': 'midnight',
+            # 'backupCount': 30,  # Mantener logs de errores de los últimos 30 días
+            'formatter': 'error',
+        },
+        'file_requests': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOGS_DIR, 'requests.log'),
+            'when': 'midnight',
+            # 'backupCount': 7,  # Mantener logs de peticiones de la última semana
+            'formatter': 'request',
+        },
+        'file_api': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOGS_DIR, 'api.log'),
+            'when': 'midnight',
+            # 'backupCount': 7,  # Mantener logs de API de la última semana
+            'formatter': 'request',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'error',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file_general'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file_requests', 'file_errors', 'console', 'mail_admins'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.server': {
+            'handlers': ['file_requests', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.template': {
+            'handlers': ['file_general', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': ['file_general', 'console'],
+            'level': 'INFO',  # Cambiar a DEBUG para ver todas las consultas SQL
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['file_errors', 'console', 'mail_admins'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        # Logger para API
+        'api': {
+            'handlers': ['console', 'file_api', 'file_errors'],
+            'level': 'DEBUG',
+            'propagate': False,
+        }
+    }
+}
