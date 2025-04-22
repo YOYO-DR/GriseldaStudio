@@ -24,7 +24,7 @@ class Producto(AbstractModel):
     
     def get_image_url(self):
         if self.imagen:
-            return f"{settings.SITE_URL}{self.imagen}"
+            return f"{settings.SITE_URL}/{self.imagen}"
         return None
 
     def __str__(self):
