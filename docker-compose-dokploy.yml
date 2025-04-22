@@ -17,6 +17,6 @@ services:
     build:
       context: ./GriseldaStudioCLIENT
     ports:
-      - '82:80'
+      - '82:82'
     depends_on:
       - django
