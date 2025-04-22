@@ -41,7 +41,7 @@ ENV ENV_NAME=prod
 
 # Exponer el puerto en el que se ejecuta el servidor de Django
 EXPOSE 80
-EXPOSE 443
+EXPOSE 445
 
 # Ejecuta el script de entrada
 ENTRYPOINT ["/app/docker-entrypoint.sh"]

@@ -4,7 +4,7 @@ services:
       context: ./GriseldaStudioAPI
       dockerfile: ./compose/dokploy/web/Dockerfile
     ports:
-      - '445:443'
+      - '445:445'
     volumes:
       - ./GriseldaStudioAPI/media:/app/media
       - ./GriseldaStudioAPI/staticfiles:/app/staticfiles
