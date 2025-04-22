@@ -1,0 +1,21 @@
+.logo {
+  width: 110px;
+}
+
+.input_append {
+  padding: 0% !important;
+}
+
+.no_border {
+  border: none !important;
+}
+
+.w_auto {
+  width: auto !important;
+}
+.sticky_top {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+}

@@ -1,0 +1,33 @@
+services:
+  django:
+    build:
+      context: ./GriseldaStudioAPI
+      dockerfile: ./compose/local/web/Dockerfile
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./GriseldaStudioAPI/media:/app/media
+      - ./GriseldaStudioAPI/staticfiles:/app/staticfiles
+      - ./GriseldaStudioAPI/logs:/app/logs
+      - ./GriseldaStudioAPI:/app/GriseldaStudioAPI
+    env_file:
+      - ./GriseldaStudioAPI/.env
+    depends_on:
+      - db
+  
+  db:
+    build:
+      context: ./GriseldaStudioAPI
+      dockerfile: ./compose/local/db/Dockerfile
+    volumes:
+      - ./GriseldaStudioAPI/postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./GriseldaStudioAPI/.env
+    ports:
+      - '5432:5432'
+
+  frontend:
+    build:
+      context: ./GriseldaStudioCLIENT
+    ports:
+      - '80:80'

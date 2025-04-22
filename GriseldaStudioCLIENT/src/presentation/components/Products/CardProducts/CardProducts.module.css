@@ -1,0 +1,9 @@
+@media (max-width: 576px) {
+  .h_fit_c{
+    height: fit-content !important;
+  }
+}
+
+.border_rad_10 {
+  border-radius: 10%;
+}
