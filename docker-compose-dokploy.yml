@@ -10,7 +10,7 @@ services:
       - ./GriseldaStudioAPI/staticfiles:/app/staticfiles
       - ./GriseldaStudioAPI/logs:/app/logs
     env_file:
-      - ./GriseldaStudioAPI/.env
+      - ./.env
 
   frontend:
     build:
