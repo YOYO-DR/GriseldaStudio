@@ -10,6 +10,6 @@ const VARIABLES = { // Le indico la ruta de la API dependiendo de si estoy en lo
 //   VARIABLES["API_URL"] = "http://localhost:8000/api"
 // }
 
-VARIABLES["NUM_WHATSAPP"] = "573148743538"; // Numero de whatsapp de la tienda
+VARIABLES["NUM_WHATSAPP"] = "573141234567"; // Numero de whatsapp de la tienda
 
 export default VARIABLES;
