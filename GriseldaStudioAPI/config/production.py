@@ -2,7 +2,6 @@ import os
 
 from .settings import *  # importamos todo
 from .settings import BASE_DIR  # importamos la ruta de inicio
-import dj_database_url
 
 # se agrega los host por medio de las variables de entono que me da Azure
 ALLOWED_HOSTS = [i for i in os.environ['WEBSITE_HOSTNAME'].split(
@@ -33,28 +32,29 @@ MIDDLEWARE = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Pedimos la config de la base de datos
-# conn_str = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
+conn_str = os.environ['POSTGRESQL_CONNECTIONSTRING']
 
 
 # extraemos los valores, y los ponemos en un diccionario para llamarlos mejor
-# conn_str_params = {pair.split('=')[0]: pair.split('=')[1] for pair in conn_str.split(' ')}
+conn_str_params = {pair.split('=')[0]: pair.split('=')[1] for pair in conn_str.split(' ')}
 
 # Este es el valor de la variable de entono que se utiliza en Azure, puede utilizarlas independientemente en azure si quiere, lo utilizao de esta forma para solo poner una sola variable de entorno
 
 # los ponemos en la config de la base de datos
 # Después de la configuración inicial de DATABASES
-if not os.path.exists(os.path.join(BASE_DIR, 'db')):
-  os.makedirs(os.path.join(BASE_DIR, 'db'))
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{os.path.join(BASE_DIR, 'db', 'db.sqlite3')}",
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': conn_str_params['dbname'],
+        'HOST': conn_str_params['host'],
+        'USER': conn_str_params['user'],
+        'PASSWORD': conn_str_params['password'],
+        'PORT': conn_str_params['port']
+    }
 }
 
-# AZURE_POSTGRESQL_CONNECTIONSTRING = dbname=nombreBD host=elHost port=3306 sslmode=require user=usuario password=pass
+# POSTGRESQL_CONNECTIONSTRING = dbname=nombreBD host=elHost port=3306 sslmode=require user=usuario password=pass
 
 # almacenmiento azure
 # Configuración para el diccionario de storages

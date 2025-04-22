@@ -11,13 +11,9 @@ function Footer() {
               <a
                 rel="noreferrer"
                 target="_blank"
-                href="https://portafolio-yoiner.azurewebsites.net"
+                href="https://yoyodr.dev"
               >
                 Yoiner
-              </a>{" "}
-              &{" "}
-              <a rel="noreferrer" target="_blank" href="https://portafolio-santiago.com">
-                Santiago
               </a>
             </p>
           </Col>
