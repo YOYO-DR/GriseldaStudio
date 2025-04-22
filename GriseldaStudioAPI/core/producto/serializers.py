@@ -4,8 +4,11 @@ from core.categoria.serializers import CategoriaSerializer
 from .models import Producto
 
 class ProductoSerializer(AbstractSerializer):
-  imagen = serializers.ImageField()
+  imagen = serializers.SerializerMethodField()
   categoria = CategoriaSerializer()
+
+  def get_imagen(self, obj):
+    return obj.get_image_url()
 
   class Meta:
     model = Producto
