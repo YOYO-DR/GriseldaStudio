@@ -6,9 +6,9 @@ services:
     ports:
       - '445:445'
     volumes:
-      - ./GriseldaStudioAPI/media:/app/GriseldaStudioAPI/media
-      - ./GriseldaStudioAPI/staticfiles:/app/GriseldaStudioAPI/staticfiles
-      - ./GriseldaStudioAPI/logs:/app/GriseldaStudioAPI/logs
+      - ./media:/app/media
+      - ./staticfiles:/app/staticfiles
+      - ./logs:/app/logs
     env_file:
       - ./.env
 
