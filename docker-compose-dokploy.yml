@@ -6,10 +6,9 @@ services:
     ports:
       - '445:445'
     volumes:
-      - ./GriseldaStudioAPI:/app:z
-      - ./GriseldaStudioAPI/media:/app/media
-      - ./GriseldaStudioAPI/staticfiles:/app/staticfiles
-      - ./GriseldaStudioAPI/logs:/app/logs
+      - ./GriseldaStudioAPI/media:/app/GriseldaStudioAPI/media
+      - ./GriseldaStudioAPI/staticfiles:/app/GriseldaStudioAPI/staticfiles
+      - ./GriseldaStudioAPI/logs:/app/GriseldaStudioAPI/logs
     env_file:
       - ./.env
 
@@ -20,3 +19,6 @@ services:
       - '82:82'
     depends_on:
       - django
+
+volumes:
+  gstudio_app:
