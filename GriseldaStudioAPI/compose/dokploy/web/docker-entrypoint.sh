@@ -14,7 +14,7 @@ python manage.py collectstatic --noinput
 
 echo "Iniciando Gunicorn..."
 # Inicia Gunicorn en segundo plano para servir la app Django
-gunicorn --workers=4 --timeout=120 config.wsgi:application --bind 0.0.0.0:8000 &
+gunicorn --timeout=120 config.wsgi:application --bind 0.0.0.0:8000 &
 
 echo "Esperando a que Gunicorn esté en funcionamiento..."
 while ! curl -s http://localhost:8000 >/dev/null; do
