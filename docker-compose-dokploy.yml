@@ -6,9 +6,9 @@ services:
     ports:
       - '445:445'
     volumes:
-      - ./media:/app/media
-      - ./staticfiles:/app/staticfiles
-      - ./logs:/app/logs
+      - media:/app/media
+      - staticfiles:/app/staticfiles
+      - logs:/app/logs
     env_file:
       - ./.env
 
@@ -19,6 +19,7 @@ services:
       - '82:82'
     depends_on:
       - django
-
 volumes:
-  gstudio_app:
+  media:
+  staticfiles:
+  logs:
