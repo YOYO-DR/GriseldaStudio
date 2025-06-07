@@ -40,7 +40,7 @@ RUN chmod +x /app/compose/dokploy/web/docker-entrypoint.sh
 ENV ENV_NAME=prod
 
 # Exponer el puerto en el que se ejecuta el servidor de Django
-EXPOSE 445
+EXPOSE 443
 
 # Ejecuta el script de entrada
 ENTRYPOINT ["/app/compose/dokploy/web/docker-entrypoint.sh"]

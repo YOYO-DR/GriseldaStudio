@@ -29,7 +29,7 @@ echo "Iniciando Nginx..."
 nginx -g "daemon off;" &
 
 echo "Esperando a que Nginx esté completamente en funcionamiento..."
-while ! curl -s http://localhost:445 >/dev/null; do
+while ! curl -s http://localhost:443 >/dev/null; do
     sleep 2
     echo "Esperando a que Nginx esté completamente en funcionamiento..."
 done

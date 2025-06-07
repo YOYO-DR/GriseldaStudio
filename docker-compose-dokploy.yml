@@ -3,8 +3,6 @@ services:
     build:
       context: ./GriseldaStudioAPI
       dockerfile: ./compose/dokploy/web/Dockerfile
-    ports:
-      - '445:445'
     volumes:
       - media:/app/media
       - staticfiles:/app/staticfiles
@@ -15,8 +13,6 @@ services:
   frontend:
     build:
       context: ./GriseldaStudioCLIENT
-    ports:
-      - '82:82'
     depends_on:
       - django
 volumes:
